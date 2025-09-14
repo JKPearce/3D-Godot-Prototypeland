@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://w0k2fl28gi6y"]
+
+[ext_resource type="Script" uid="uid://65h7wq8ssuwn" path="res://Entities/UI/MainUI.gd" id="1_eo31r"]
+[ext_resource type="PackedScene" uid="uid://blwl07gv2tdpf" path="res://Entities/UI/InspectUI/inspect_ui.tscn" id="2_au4m4"]
+
+[node name="MainUI" type="CanvasLayer"]
+script = ExtResource("1_eo31r")
+
+[node name="InteractLabelContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InteractTipLabel" type="Label" parent="InteractLabelContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Press E to interact"
+
+[node name="InspectUI" parent="." instance=ExtResource("2_au4m4")]

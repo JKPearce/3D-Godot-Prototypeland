@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://coyrett408wlj"]
+
+[ext_resource type="Script" uid="uid://b3yis137y2dqe" path="res://Entities/Player/player.gd" id="1_mv1ah"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2yge"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mv1ah"]
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 6
+script = ExtResource("1_mv1ah")
+
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7023, 0)
+current = true
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -2)
+collision_mask = 6
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera"]
+current = true
+
+[node name="HandSocket" type="Node3D" parent="Camera"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.775393, -1.71209)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02751, 0)
+shape = SubResource("CapsuleShape3D_h2yge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00865, 0)
+mesh = SubResource("CapsuleMesh_mv1ah")

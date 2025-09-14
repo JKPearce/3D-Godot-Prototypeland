@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://ca65r3wjpv6x1"]
+
+[ext_resource type="PackedScene" uid="uid://w0k2fl28gi6y" path="res://Entities/UI/MainUI.tscn" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://coyrett408wlj" path="res://Entities/Player/player.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://dfpm27dwlf2us" path="res://Assets/GreyboxTextures/greybox_grey_grid.png" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://rvwx4o46nmiv" path="res://Entities/Box/box.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ca3l5w11obv1d" path="res://Entities/Printer/Printer.tscn" id="5_lquwl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_top_color = Color(0.529412, 0.807843, 0.921569, 1)
+sky_horizon_color = Color(0.27451, 0.509804, 0.705882, 1)
+ground_bottom_color = Color(0.545098, 0.52549, 0.501961, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+ambient_light_source = 3
+tonemap_mode = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_texture = ExtResource("2_0xm2m")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ig7tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0xm2m"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="main" type="Node3D"]
+
+[node name="MainUI" parent="." instance=ExtResource("1_1bvp3")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 34.596, 0)
+light_color = Color(1, 0.835294, 0.501961, 1)
+light_energy = 1.2
+light_indirect_energy = 1.2
+light_specular = 0.5
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 0.8
+shadow_blur = 2.0
+directional_shadow_split_2 = 0.3
+directional_shadow_split_3 = 0.6
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.9
+directional_shadow_max_distance = 200.0
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="Office" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Office"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_1bvp3")
+mesh = SubResource("PlaneMesh_ig7tw")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_h2yge")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Office/Floor"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Office/Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0xm2m")
+
+[node name="Box" parent="Office" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.121813, 0.511927, -3.20293)
+
+[node name="Printer" parent="Office" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.74758)

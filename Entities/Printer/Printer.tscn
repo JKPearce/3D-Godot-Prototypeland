@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://ca3l5w11obv1d"]
+
+[ext_resource type="Texture2D" uid="uid://hus4c3qky0d8" path="res://Assets/GreyboxTextures/greybox_teal_solid.png" id="1_oqd42"]
+[ext_resource type="Script" uid="uid://dasn6nkqi65qr" path="res://Entities/Printer/printer.gd" id="1_uktoy"]
+[ext_resource type="PackedScene" uid="uid://c8j18btlfx8dp" path="res://Components/Interactable/interactable.tscn" id="2_khbxa"]
+[ext_resource type="AudioStream" uid="uid://365wsdi1em1f" path="res://Entities/Printer/Audio/Slap3.wav" id="4_asywo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_asywo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uktoy"]
+albedo_texture = ExtResource("1_oqd42")
+
+[sub_resource type="BoxMesh" id="BoxMesh_khbxa"]
+
+[node name="Printer" type="Node3D" groups=["pickup"]]
+script = ExtResource("1_uktoy")
+
+[node name="Interactable" parent="." instance=ExtResource("2_khbxa")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498939, 0)
+
+[node name="CollisionShape3D" parent="Interactable" index="0"]
+shape = SubResource("BoxShape3D_asywo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactable"]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_uktoy")
+mesh = SubResource("BoxMesh_khbxa")
+skeleton = NodePath("")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.537017, 0)
+stream = ExtResource("4_asywo")
+unit_size = 1.0
+max_distance = 20.0
+attenuation_filter_cutoff_hz = 20000.0
+attenuation_filter_db = 0.0
+
+[editable path="Interactable"]
