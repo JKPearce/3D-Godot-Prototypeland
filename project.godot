@@ -83,3 +83,12 @@ right_click={
 3d_physics/layer_2="World"
 3d_physics/layer_3="Objects"
 3d_physics/layer_4="Player Pusher Body"
+
+[physics]
+
+common/physics_interpolation=true
+
+[rendering]
+
+anti_aliasing/quality/msaa_3d=1
+anti_aliasing/quality/screen_space_aa=1

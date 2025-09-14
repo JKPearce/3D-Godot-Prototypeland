@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8j18btlfx8dp"]
+[gd_scene load_steps=3 format=3 uid="uid://c8j18btlfx8dp"]
 
 [ext_resource type="Script" uid="uid://c0kxucsm1xhlb" path="res://Components/Interactable/interactable.gd" id="1_mgpw0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mgpw0"]
+bounce = 0.1
 
 [node name="Interactable" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 6
-freeze = true
+physics_material_override = SubResource("PhysicsMaterial_mgpw0")
+continuous_cd = true
 script = ExtResource("1_mgpw0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

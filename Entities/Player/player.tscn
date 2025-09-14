@@ -12,8 +12,10 @@ script = ExtResource("1_mv1ah")
 
 [node name="Camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7023, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 current = true
+near = 0.2
+far = 500.0
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera"]
 unique_name_in_owner = true
@@ -25,7 +27,6 @@ current = true
 
 [node name="HandSocket" type="Node3D" parent="Camera"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.775393, -1.71209)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02751, 0)

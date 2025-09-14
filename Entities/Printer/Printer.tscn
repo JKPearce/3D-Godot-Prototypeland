@@ -1,32 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca3l5w11obv1d"]
+[gd_scene load_steps=6 format=3 uid="uid://ca3l5w11obv1d"]
 
-[ext_resource type="Texture2D" uid="uid://hus4c3qky0d8" path="res://Assets/GreyboxTextures/greybox_teal_solid.png" id="1_oqd42"]
 [ext_resource type="Script" uid="uid://dasn6nkqi65qr" path="res://Entities/Printer/printer.gd" id="1_uktoy"]
 [ext_resource type="PackedScene" uid="uid://c8j18btlfx8dp" path="res://Components/Interactable/interactable.tscn" id="2_khbxa"]
-[ext_resource type="AudioStream" uid="uid://365wsdi1em1f" path="res://Entities/Printer/Audio/Slap3.wav" id="4_asywo"]
+[ext_resource type="PackedScene" uid="uid://cg034lot5ou3v" path="res://Entities/Printer/Printer.fbx" id="3_asywo"]
+[ext_resource type="AudioStream" uid="uid://365wsdi1em1f" path="res://Entities/Printer/Slap3.wav" id="4_asywo"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_asywo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uktoy"]
-albedo_texture = ExtResource("1_oqd42")
-
-[sub_resource type="BoxMesh" id="BoxMesh_khbxa"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_f3lm6"]
+size = Vector3(0.728577, 0.279663, 0.491699)
 
 [node name="Printer" type="Node3D" groups=["pickup"]]
 script = ExtResource("1_uktoy")
 
 [node name="Interactable" parent="." instance=ExtResource("2_khbxa")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498939, 0)
+mass = 1.5
 
 [node name="CollisionShape3D" parent="Interactable" index="0"]
-shape = SubResource("BoxShape3D_asywo")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00283813, 0.143005, -0.00219727)
+shape = SubResource("BoxShape3D_f3lm6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactable"]
-unique_name_in_owner = true
-material_override = SubResource("StandardMaterial3D_uktoy")
-mesh = SubResource("BoxMesh_khbxa")
-skeleton = NodePath("")
+[node name="Printer" parent="Interactable" instance=ExtResource("3_asywo")]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true

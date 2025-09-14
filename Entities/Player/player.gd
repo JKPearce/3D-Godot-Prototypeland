@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Player
 
+
 #raycast
 @onready var ray: RayCast3D = %RayCast3D
 var last_hit: Node = null #To track the last hit node with the ray - used to stop constantly emitting signals when there was no changes to emit and also track for input
@@ -96,6 +97,8 @@ func _physics_process(delta: float) -> void:
 	
 	#continue physics func
 	
+
+
 
 func _notification(what: int) -> void:
 	if !controls_enabled:

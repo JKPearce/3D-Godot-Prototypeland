@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://365wsdi1em1f"
-path="res://.godot/imported/Slap3.wav-c2a06c080f96feba1103914cd0df35f9.sample"
+path="res://.godot/imported/Slap3.wav-0dd2ca92b1191c15f3b1d6348f6068b6.sample"
 
 [deps]
 
-source_file="res://Entities/Printer/Audio/Slap3.wav"
-dest_files=["res://.godot/imported/Slap3.wav-c2a06c080f96feba1103914cd0df35f9.sample"]
+source_file="res://Entities/Printer/Slap3.wav"
+dest_files=["res://.godot/imported/Slap3.wav-0dd2ca92b1191c15f3b1d6348f6068b6.sample"]
 
 [params]
 

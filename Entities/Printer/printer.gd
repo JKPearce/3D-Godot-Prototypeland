@@ -8,7 +8,7 @@ class_name Printer
 
 var original_parent
 
-var drop_distance := Vector3(0, 0, -2)
+var drop_distance := Vector3(0, -0.5, -1.5)
 
 
 func interact() -> void:	
@@ -28,7 +28,7 @@ func pick_up():
 	player.hand_socket.add_child(self)
 
 	# Reset local transform so it sits correctly in hand
-	transform = Transform3D(Basis())
+	transform = Transform3D(Basis(), drop_distance)
 	interactable.global_transform = global_transform
 
 
@@ -54,7 +54,7 @@ func throw(force: float):
 	original_parent.add_child(self)
 
 	# Place at camera
-	global_transform = player.cam.global_transform.translated_local(Vector3(0, 0, -1))
+	global_transform = player.cam.global_transform.translated_local(drop_distance)
 
 	# Apply throw impulse in camera forward direction
 	var dir = -player.cam.global_transform.basis.z.normalized()
