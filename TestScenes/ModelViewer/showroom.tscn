@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://b7umgtlacupga"]
+
+[ext_resource type="Texture2D" uid="uid://dfpm27dwlf2us" path="res://Assets/GreyboxTextures/greybox_grey_grid.png" id="1_m1pvj"]
+[ext_resource type="PackedScene" uid="uid://coyrett408wlj" path="res://Entities/Player/player.tscn" id="2_tqdus"]
+[ext_resource type="PackedScene" uid="uid://c43h8uhh7cgma" path="res://TestScenes/ModelViewer/Pack1/Office Set - VNB.fbx" id="3_376jj"]
+[ext_resource type="PackedScene" uid="uid://gfqu67o0hf7d" path="res://TestScenes/ModelViewer/Pack2/Office Set 2.fbx" id="4_wibe5"]
+[ext_resource type="PackedScene" uid="uid://cgtjo6tqi3vsj" path="res://TestScenes/ModelViewer/GamingPack/Gaming Set.fbx" id="5_dteph"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m1pvj"]
+sky_top_color = Color(0.529412, 0.807843, 0.921569, 1)
+sky_horizon_color = Color(0.27451, 0.509804, 0.705882, 1)
+ground_bottom_color = Color(0.545098, 0.52549, 0.501961, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_m1pvj")
+
+[sub_resource type="Environment" id="Environment_376jj"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+ambient_light_source = 3
+tonemap_mode = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_376jj"]
+albedo_texture = ExtResource("1_m1pvj")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wibe5"]
+size = Vector2(50, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dteph"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_m1pvj"]
+data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
+
+[node name="Showroom" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_376jj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353554, 0, 0.707107, 0.707106, -0.5, -0.612372, 0.612373, 0, 0, 0)
+light_color = Color(1, 0.941176, 0.815686, 1)
+light_indirect_energy = 1.1
+light_specular = 0.5
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 0.8
+shadow_blur = 2.0
+directional_shadow_split_2 = 0.3
+directional_shadow_split_3 = 0.6
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.9
+directional_shadow_max_distance = 200.0
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_376jj")
+mesh = SubResource("PlaneMesh_wibe5")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_dteph")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_m1pvj")
+
+[node name="Player" parent="." instance=ExtResource("2_tqdus")]
+
+[node name="Gaming Set" parent="." instance=ExtResource("5_dteph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.4223, 0.26516, -0.844754)
+
+[node name="Office Set 2" parent="." instance=ExtResource("4_wibe5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.1482, 0.0150888, -3.84286)
+
+[node name="Office Set - VNB" parent="." instance=ExtResource("3_376jj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0293646, 0.0726012, -13.7167)

@@ -19,7 +19,7 @@ var target_vel: Vector3
 
 var controls_enabled := true
 
-var holding_item: Node3D = null
+var holding_item: Carryable = null
 @onready var hand_socket: Node3D = %HandSocket
 
 var throw_charge := 0.0
@@ -39,21 +39,26 @@ func _input(event: InputEvent) -> void:
 		return
 
 	#throw item
-	if event.is_action_pressed("left_click") and holding_item:
+	if event.is_action_pressed("right_click") and holding_item:
 		throw_charge = 0.0
 		charging = true
 
-	if event.is_action_released("left_click") and holding_item:
+	#throw item
+	if event.is_action_released("right_click") and holding_item:
 		var power = throw_charge / throw_charge_max
 		holding_item.throw(power * throw_force)
 		charging = false
 
-
+	#interact with item
 	if event.is_action_pressed("interact"):
-		if holding_item != null:
-			holding_item.drop()
+		if holding_item:
+			holding_item.interact()
 		elif last_hit and last_hit.has_method("interact"):
 			last_hit.interact()
+	
+	#use item
+	if event.is_action_pressed("left_click") and holding_item:
+		holding_item.use()
 
 
 	#handle mouse release and capture
@@ -85,11 +90,11 @@ func _physics_process(delta: float) -> void:
 	handle_movement(delta)
 
 	if ray.is_colliding():
-		var hit = ray.get_collider()
+		var hit = ray.get_collider().owner
 		if hit != last_hit: #only fire if something new is being looked at
 			last_hit = hit
 			if hit.has_method("interact"):
-				EventManager.display_interact_label.emit(hit.get_interact_label_text()) #get the string for interactable to display and tell UI to display it
+				EventManager.display_interact_label.emit(hit.tooltip_text) #get the string for interactable to display and tell UI to display it
 	else:
 		if last_hit != null: #only fire when we actually stop looking at something
 			last_hit = null

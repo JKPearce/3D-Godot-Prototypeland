@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbxq4oe0ertdv"
-path.s3tc="res://.godot/imported/greybox_dark_grid.png-e22c32e26d7b2c4fb7b774faeb02f6a5.s3tc.ctex"
+uid="uid://cgk25kj7c8b0o"
+path.s3tc="res://.godot/imported/PC_A.png-ba46e206fe535bc5e150fd2577056594.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/GreyboxTextures/greybox_dark_grid.png"
-dest_files=["res://.godot/imported/greybox_dark_grid.png-e22c32e26d7b2c4fb7b774faeb02f6a5.s3tc.ctex"]
+source_file="res://TestScenes/ModelViewer/GamingPack/PC_A.png"
+dest_files=["res://.godot/imported/PC_A.png-ba46e206fe535bc5e150fd2577056594.s3tc.ctex"]
 
 [params]
 
